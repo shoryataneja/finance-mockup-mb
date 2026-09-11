@@ -1,13 +1,25 @@
 import React, { useState } from 'react';
 import {
   View, Text, TextInput, TouchableOpacity, StyleSheet,
-  ScrollView, SafeAreaView, Modal, Platform,
+  ScrollView, SafeAreaView, Modal, FlatList,
 } from 'react-native';
-import { Calendar } from 'react-native-calendars';
 import { Ionicons } from '@expo/vector-icons';
 
 const GENDERS = ['Male', 'Female', 'Other'];
 const MARITAL = ['Single', 'Married', 'Divorced', 'Widowed'];
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+const currentYear = new Date().getFullYear();
+const YEARS = Array.from({ length: 80 }, (_, i) => currentYear - i);
+const DAYS = Array.from({ length: 31 }, (_, i) => i + 1);
+
+function calcAge(day, month, year) {
+  const today = new Date();
+  let age = today.getFullYear() - year;
+  const m = today.getMonth() - month;
+  if (m < 0 || (m === 0 && today.getDate() < day)) age--;
+  return age > 0 ? String(age) : '';
+}
 
 export default function EnquiryStep1Screen({ navigation }) {
   const [form, setForm] = useState({
@@ -16,11 +28,19 @@ export default function EnquiryStep1Screen({ navigation }) {
     yearsAtAddress: '', yearsAtCity: '',
   });
   const [showCal, setShowCal] = useState(false);
+  const [pickerDay, setPickerDay] = useState(1);
+  const [pickerMonth, setPickerMonth] = useState(0);
+  const [pickerYear, setPickerYear] = useState(1990);
 
   const set = (key, val) => setForm(f => ({ ...f, [key]: val }));
 
-  const handleDOB = (day) => {
-    set('dob', day.dateString);
+  const confirmDOB = () => {
+    const dd = String(pickerDay).padStart(2, '0');
+    const mm = String(pickerMonth + 1).padStart(2, '0');
+    const dob = `${pickerYear}-${mm}-${dd}`;
+    const display = `${dd} ${MONTHS[pickerMonth]} ${pickerYear}`;
+    const age = calcAge(pickerDay, pickerMonth, pickerYear);
+    setForm(f => ({ ...f, dob: display, age }));
     setShowCal(false);
   };
 
@@ -58,14 +78,11 @@ export default function EnquiryStep1Screen({ navigation }) {
         </Field>
 
         <Field label="Age">
-          <TextInput
-            style={styles.input}
-            placeholder="Enter age"
-            placeholderTextColor="#aaa"
-            keyboardType="number-pad"
-            value={form.age}
-            onChangeText={v => set('age', v.replace(/\D/g, ''))}
-          />
+          <View style={[styles.input, styles.readOnly]}>
+            <Text style={form.age ? styles.inputText : styles.placeholder}>
+              {form.age ? `${form.age} years` : 'Select DOB to auto-fill'}
+            </Text>
+          </View>
         </Field>
 
         <Field label="Gender">
@@ -154,21 +171,86 @@ export default function EnquiryStep1Screen({ navigation }) {
         </TouchableOpacity>
       </ScrollView>
 
-      {/* Calendar Modal */}
+      {/* DOB Picker Modal */}
       <Modal visible={showCal} transparent animationType="slide">
         <TouchableOpacity style={styles.modalOverlay} activeOpacity={1} onPress={() => setShowCal(false)} />
         <View style={styles.calendarSheet}>
           <Text style={styles.calTitle}>Select Date of Birth</Text>
-          <Calendar
-            onDayPress={handleDOB}
-            markedDates={form.dob ? { [form.dob]: { selected: true, selectedColor: '#1a3a6b' } } : {}}
-            maxDate={new Date().toISOString().split('T')[0]}
-            theme={{
-              todayTextColor: '#1a3a6b',
-              arrowColor: '#1a3a6b',
-              selectedDayBackgroundColor: '#1a3a6b',
-            }}
-          />
+
+          <View style={styles.pickerRow}>
+            {/* Day */}
+            <View style={styles.pickerCol}>
+              <Text style={styles.pickerColLabel}>Day</Text>
+              <FlatList
+                data={DAYS}
+                keyExtractor={i => String(i)}
+                style={styles.pickerList}
+                showsVerticalScrollIndicator={false}
+                initialScrollIndex={pickerDay - 1}
+                getItemLayout={(_, i) => ({ length: 44, offset: 44 * i, index: i })}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    style={[styles.pickerItem, pickerDay === item && styles.pickerItemActive]}
+                    onPress={() => setPickerDay(item)}
+                  >
+                    <Text style={[styles.pickerItemText, pickerDay === item && styles.pickerItemTextActive]}>
+                      {String(item).padStart(2, '0')}
+                    </Text>
+                  </TouchableOpacity>
+                )}
+              />
+            </View>
+
+            {/* Month */}
+            <View style={styles.pickerCol}>
+              <Text style={styles.pickerColLabel}>Month</Text>
+              <FlatList
+                data={MONTHS}
+                keyExtractor={m => m}
+                style={styles.pickerList}
+                showsVerticalScrollIndicator={false}
+                initialScrollIndex={pickerMonth}
+                getItemLayout={(_, i) => ({ length: 44, offset: 44 * i, index: i })}
+                renderItem={({ item, index }) => (
+                  <TouchableOpacity
+                    style={[styles.pickerItem, pickerMonth === index && styles.pickerItemActive]}
+                    onPress={() => setPickerMonth(index)}
+                  >
+                    <Text style={[styles.pickerItemText, pickerMonth === index && styles.pickerItemTextActive]}>
+                      {item}
+                    </Text>
+                  </TouchableOpacity>
+                )}
+              />
+            </View>
+
+            {/* Year */}
+            <View style={styles.pickerCol}>
+              <Text style={styles.pickerColLabel}>Year</Text>
+              <FlatList
+                data={YEARS}
+                keyExtractor={y => String(y)}
+                style={styles.pickerList}
+                showsVerticalScrollIndicator={false}
+                initialScrollIndex={YEARS.indexOf(pickerYear)}
+                getItemLayout={(_, i) => ({ length: 44, offset: 44 * i, index: i })}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    style={[styles.pickerItem, pickerYear === item && styles.pickerItemActive]}
+                    onPress={() => setPickerYear(item)}
+                  >
+                    <Text style={[styles.pickerItemText, pickerYear === item && styles.pickerItemTextActive]}>
+                      {item}
+                    </Text>
+                  </TouchableOpacity>
+                )}
+              />
+            </View>
+          </View>
+
+          <TouchableOpacity style={styles.confirmBtn} onPress={confirmDOB}>
+            <Text style={styles.confirmBtnText}>Confirm Date of Birth</Text>
+          </TouchableOpacity>
         </View>
       </Modal>
     </SafeAreaView>
@@ -203,6 +285,7 @@ const styles = StyleSheet.create({
   },
   inputText: { fontSize: 15, color: '#111' },
   placeholder: { fontSize: 15, color: '#aaa' },
+  readOnly: { backgroundColor: '#f5f5f5' },
   multiline: { height: 80, textAlignVertical: 'top' },
   chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 10 },
   chip: {
@@ -224,5 +307,22 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff', borderTopLeftRadius: 20, borderTopRightRadius: 20,
     padding: 20, paddingBottom: 36,
   },
-  calTitle: { fontSize: 16, fontWeight: '700', color: '#1a3a6b', marginBottom: 10, textAlign: 'center' },
+  calTitle: { fontSize: 16, fontWeight: '700', color: '#1a3a6b', marginBottom: 16, textAlign: 'center' },
+
+  pickerRow: { flexDirection: 'row', gap: 8, marginBottom: 20 },
+  pickerCol: { flex: 1, alignItems: 'center' },
+  pickerColLabel: { fontSize: 11, fontWeight: '700', color: '#888', textTransform: 'uppercase', letterSpacing: 0.6, marginBottom: 8 },
+  pickerList: { height: 220, width: '100%' },
+  pickerItem: {
+    height: 44, alignItems: 'center', justifyContent: 'center',
+    borderRadius: 10, marginHorizontal: 2,
+  },
+  pickerItemActive: { backgroundColor: '#1a3a6b' },
+  pickerItemText: { fontSize: 15, color: '#444', fontWeight: '500' },
+  pickerItemTextActive: { color: '#fff', fontWeight: '700' },
+  confirmBtn: {
+    backgroundColor: '#1a3a6b', borderRadius: 12, paddingVertical: 15,
+    alignItems: 'center',
+  },
+  confirmBtnText: { color: '#fff', fontSize: 15, fontWeight: '700' },
 });
