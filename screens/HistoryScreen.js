@@ -6,25 +6,25 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 
 const ENQUIRIES = [
-  { id: '1',  name: 'Rahul Mehta',       car: 'Toyota Hyryder',       bank: 'SBI',   roi: '8.60%', status: 'Sanctioned', date: 'Today, 10:24 AM' },
-  { id: '2',  name: 'Priya Sharma',      car: 'Hyundai Creta',        bank: 'HDFC',  roi: '8.90%', status: 'Pending',    date: 'Today, 09:10 AM' },
-  { id: '3',  name: 'Amit Verma',        car: 'Maruti Brezza',        bank: 'BOB',   roi: '8.60%', status: 'Sanctioned', date: 'Yesterday, 4:45 PM' },
-  { id: '4',  name: 'Sneha Patil',       car: 'Tata Nexon EV',        bank: 'ICICI', roi: '8.90%', status: 'Rejected',   date: 'Yesterday, 2:30 PM' },
-  { id: '5',  name: 'Karan Singh',       car: 'Mahindra XUV700',      bank: 'Kotak', roi: '8.80%', status: 'Sanctioned', date: '25 Aug, 11:00 AM' },
-  { id: '6',  name: 'Deepika Nair',      car: 'Honda City',           bank: 'PNB',   roi: '8.70%', status: 'Pending',    date: '25 Aug, 09:50 AM' },
-  { id: '7',  name: 'Vikram Joshi',      car: 'Kia Seltos',           bank: 'Yes',   roi: '8.75%', status: 'Sanctioned', date: '24 Aug, 3:15 PM' },
-  { id: '8',  name: 'Ananya Reddy',      car: 'Skoda Kushaq',         bank: 'Federal', roi: '9.10%', status: 'Rejected', date: '24 Aug, 1:00 PM' },
-  { id: '9',  name: 'Suresh Kumar',      car: 'Volkswagen Taigun',    bank: 'Union', roi: '9.00%', status: 'Sanctioned', date: '23 Aug, 5:20 PM' },
-  { id: '10', name: 'Meera Iyer',        car: 'Renault Kiger',        bank: 'Canara', roi: '9.10%', status: 'Pending',   date: '23 Aug, 10:30 AM' },
-  { id: '11', name: 'Rohit Agarwal',     car: 'Ford EcoSport',        bank: 'SBI',   roi: '8.60%', status: 'Sanctioned', date: '22 Aug, 2:45 PM' },
-  { id: '12', name: 'Pooja Desai',       car: 'Nissan Magnite',       bank: 'HDFC',  roi: '8.90%', status: 'Rejected',   date: '22 Aug, 11:15 AM' },
+  { id: '1',  name: 'Arjun Kapoor',    car: 'Toyota Hyryder',              bank: 'SBI',     roi: '8.60%', status: 'Disbursed',   date: 'Today, 10:24 AM' },
+  { id: '2',  name: 'Priya Sharma',    car: 'Toyota Urban Cruiser Hyryder', bank: 'HDFC',    roi: '8.90%', status: 'In-Progress', date: 'Today, 09:10 AM' },
+  { id: '3',  name: 'Amit Verma',      car: 'Toyota Glanza',               bank: 'BOB',     roi: '8.60%', status: 'Disbursed',   date: 'Yesterday, 4:45 PM' },
+  { id: '4',  name: 'Sneha Patil',     car: 'Toyota Hyryder',              bank: 'ICICI',   roi: '8.90%', status: 'Rejected',    date: 'Yesterday, 2:30 PM' },
+  { id: '5',  name: 'Karan Singh',     car: 'Toyota Fortuner',             bank: 'Kotak',   roi: '8.80%', status: 'Disbursed',   date: '25 Aug, 11:00 AM' },
+  { id: '6',  name: 'Deepika Nair',    car: 'Toyota Camry',                bank: 'PNB',     roi: '8.70%', status: 'In-Progress', date: '25 Aug, 09:50 AM' },
+  { id: '7',  name: 'Vikram Joshi',    car: 'Toyota Innova Crysta',        bank: 'Yes Bank', roi: '8.75%', status: 'Disbursed',  date: '24 Aug, 3:15 PM' },
+  { id: '8',  name: 'Ananya Reddy',    car: 'Toyota Hyryder',              bank: 'Federal', roi: '9.10%', status: 'Rejected',    date: '24 Aug, 1:00 PM' },
+  { id: '9',  name: 'Rohan Desai',     car: 'Toyota Yaris',                bank: 'Axis',    roi: '8.75%', status: 'In-Progress', date: '02 Sep, 09:45 AM' },
+  { id: '10', name: 'Meera Iyer',      car: 'Toyota Innova HyCross',       bank: 'IDFC',    roi: '8.65%', status: 'In-Progress', date: '01 Sep, 09:20 AM' },
+  { id: '11', name: 'Suresh Nambiar',  car: 'Toyota Fortuner',             bank: 'SBI',     roi: '8.55%', status: 'In-Progress', date: '30 Aug, 1:45 PM' },
+  { id: '12', name: 'Kavya Menon',     car: 'Toyota Taisor',               bank: 'HDFC',    roi: '8.85%', status: 'In-Progress', date: '03 Sep, 09:50 AM' },
 ];
 
 const STATUS_CONFIG = {
-  Sanctioned:    { color: '#1a7a4a', bg: '#e6f4ed', icon: 'checkmark-circle' },
-  Rejected:      { color: '#b03a2e', bg: '#faeaea', icon: 'close-circle' },
-  Pending:       { color: '#b07d1a', bg: '#fdf3e0', icon: 'time' },
   'In-Progress': { color: '#5c6bc0', bg: '#ede7f6', icon: 'sync-outline' },
+  Sanctioned:    { color: '#1a7a4a', bg: '#e6f4ed', icon: 'checkmark-circle' },
+  Disbursed:     { color: '#1a7a4a', bg: '#e6f4ed', icon: 'checkmark-circle-outline' },
+  Rejected:      { color: '#b03a2e', bg: '#faeaea', icon: 'close-circle' },
 };
 
 function EnquiryCard({ item, index }) {
@@ -111,7 +111,7 @@ export default function HistoryScreen() {
 
       {/* Filter chips */}
       <View style={styles.filterChips}>
-        {['All', 'Sanctioned', 'In-Progress', 'Pending', 'Rejected'].map(f => (
+        {['All', 'In-Progress', 'Sanctioned', 'Disbursed', 'Rejected'].map(f => (
           <TouchableOpacity
             key={f}
             style={[styles.filterChip, activeFilter === f && styles.filterChipActive]}

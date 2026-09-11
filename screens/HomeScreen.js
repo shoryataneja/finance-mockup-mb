@@ -9,26 +9,27 @@ const NAME = 'Avni Gupta';
 const DESIGNATION = 'Finance Executive';
 
 const RECENT = [
-  { id: '1', name: 'Rahul Mehta',    car: 'Toyota Hyryder',   bank: 'SBI',    roi: '8.60%', status: 'Sanctioned', date: 'Today, 10:24 AM' },
-  { id: '2', name: 'Priya Sharma',   car: 'Hyundai Creta',    bank: 'HDFC',   roi: '8.90%', status: 'Pending',    date: 'Today, 09:10 AM' },
-  { id: '3', name: 'Amit Verma',     car: 'Maruti Brezza',    bank: 'BOB',    roi: '8.60%', status: 'Sanctioned', date: 'Yesterday, 4:45 PM' },
-  { id: '4', name: 'Sneha Patil',    car: 'Tata Nexon EV',    bank: 'ICICI',  roi: '8.90%', status: 'Rejected',   date: 'Yesterday, 2:30 PM' },
-  { id: '5', name: 'Karan Singh',    car: 'Mahindra XUV700',  bank: 'Kotak',  roi: '8.80%', status: 'Sanctioned', date: '25 Aug, 11:00 AM' },
-  { id: '6', name: 'Deepika Nair',   car: 'Honda City',       bank: 'PNB',    roi: '8.70%', status: 'Pending',    date: '25 Aug, 09:50 AM' },
+  { id: '1', name: 'Arjun Kapoor',   car: 'Toyota Hyryder',            bank: 'SBI',    roi: '8.60%', status: 'Disbursed',   date: 'Today, 10:24 AM' },
+  { id: '2', name: 'Priya Sharma',   car: 'Toyota Urban Cruiser Hyryder', bank: 'HDFC', roi: '8.90%', status: 'In-Progress', date: 'Today, 09:10 AM' },
+  { id: '3', name: 'Amit Verma',     car: 'Toyota Glanza',             bank: 'BOB',    roi: '8.60%', status: 'Disbursed',   date: 'Yesterday, 4:45 PM' },
+  { id: '4', name: 'Sneha Patil',    car: 'Toyota Hyryder',            bank: 'ICICI',  roi: '8.90%', status: 'Rejected',    date: 'Yesterday, 2:30 PM' },
+  { id: '5', name: 'Karan Singh',    car: 'Toyota Fortuner',           bank: 'Kotak',  roi: '8.80%', status: 'Disbursed',   date: '25 Aug, 11:00 AM' },
+  { id: '6', name: 'Deepika Nair',   car: 'Toyota Camry',              bank: 'PNB',    roi: '8.70%', status: 'In-Progress', date: '25 Aug, 09:50 AM' },
 ];
 
 const STATUS_CONFIG = {
-  Sanctioned: { color: '#1a7a4a', bg: '#e6f4ed', icon: 'checkmark-circle' },
-  Rejected:   { color: '#b03a2e', bg: '#faeaea', icon: 'close-circle' },
-  Pending:    { color: '#b07d1a', bg: '#fdf3e0', icon: 'time' },
+  'In-Progress': { color: '#5c6bc0', bg: '#ede7f6', icon: 'sync-outline' },
+  Sanctioned:    { color: '#1a7a4a', bg: '#e6f4ed', icon: 'checkmark-circle' },
+  Disbursed:     { color: '#1a7a4a', bg: '#e6f4ed', icon: 'checkmark-circle-outline' },
+  Rejected:      { color: '#b03a2e', bg: '#faeaea', icon: 'close-circle' },
 };
 
-const KPI_TOP = { label: 'Total Enquiries', value: '12', icon: 'document-text-outline', color: '#1a3a6b', bg: '#e8eef7' };
+const KPI_TOP = { label: 'Total Logins', value: '12', icon: 'document-text-outline', color: '#1a3a6b', bg: '#e8eef7' };
 const KPI_GRID = [
-  { label: 'Sanctioned',  value: '7', icon: 'checkmark-circle-outline', color: '#1a7a4a', bg: '#e6f4ed' },
-  { label: 'In Progress', value: '2', icon: 'sync-outline',              color: '#5c6bc0', bg: '#ede7f6' },
-  { label: 'Pending',     value: '2', icon: 'time-outline',              color: '#b07d1a', bg: '#fdf3e0' },
-  { label: 'Rejected',    value: '1', icon: 'close-circle-outline',      color: '#b03a2e', bg: '#faeaea' },
+  { label: 'In-Progress', value: '6', icon: 'sync-outline',              color: '#5c6bc0', bg: '#ede7f6' },
+  { label: 'Sanctioned',  value: '0', icon: 'checkmark-circle-outline',  color: '#1a7a4a', bg: '#e6f4ed' },
+  { label: 'Disbursed',   value: '4', icon: 'cash-outline',              color: '#1a7a4a', bg: '#e6f4ed' },
+  { label: 'Rejected',    value: '2', icon: 'close-circle-outline',      color: '#b03a2e', bg: '#faeaea' },
 ];
 
 function getGreeting() {
