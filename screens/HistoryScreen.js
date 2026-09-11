@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
 import {
   View, Text, StyleSheet, SafeAreaView,
-  TextInput, FlatList, TouchableOpacity,
+  TextInput, FlatList, TouchableOpacity, ScrollView,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 const ENQUIRIES = [
-  { id: '1',  name: 'Arjun Kapoor',    car: 'Toyota Hyryder',              bank: 'SBI',     roi: '8.60%', status: 'Disbursed',   date: 'Today, 10:24 AM' },
-  { id: '2',  name: 'Priya Sharma',    car: 'Toyota Urban Cruiser Hyryder', bank: 'HDFC',    roi: '8.90%', status: 'In-Progress', date: 'Today, 09:10 AM' },
-  { id: '3',  name: 'Amit Verma',      car: 'Toyota Glanza',               bank: 'BOB',     roi: '8.60%', status: 'Disbursed',   date: 'Yesterday, 4:45 PM' },
-  { id: '4',  name: 'Sneha Patil',     car: 'Toyota Hyryder',              bank: 'ICICI',   roi: '8.90%', status: 'Rejected',    date: 'Yesterday, 2:30 PM' },
-  { id: '5',  name: 'Karan Singh',     car: 'Toyota Fortuner',             bank: 'Kotak',   roi: '8.80%', status: 'Disbursed',   date: '25 Aug, 11:00 AM' },
-  { id: '6',  name: 'Deepika Nair',    car: 'Toyota Camry',                bank: 'PNB',     roi: '8.70%', status: 'In-Progress', date: '25 Aug, 09:50 AM' },
-  { id: '7',  name: 'Vikram Joshi',    car: 'Toyota Innova Crysta',        bank: 'Yes Bank', roi: '8.75%', status: 'Disbursed',  date: '24 Aug, 3:15 PM' },
-  { id: '8',  name: 'Ananya Reddy',    car: 'Toyota Hyryder',              bank: 'Federal', roi: '9.10%', status: 'Rejected',    date: '24 Aug, 1:00 PM' },
-  { id: '9',  name: 'Rohan Desai',     car: 'Toyota Yaris',                bank: 'Axis',    roi: '8.75%', status: 'In-Progress', date: '02 Sep, 09:45 AM' },
-  { id: '10', name: 'Meera Iyer',      car: 'Toyota Innova HyCross',       bank: 'IDFC',    roi: '8.65%', status: 'In-Progress', date: '01 Sep, 09:20 AM' },
-  { id: '11', name: 'Suresh Nambiar',  car: 'Toyota Fortuner',             bank: 'SBI',     roi: '8.55%', status: 'In-Progress', date: '30 Aug, 1:45 PM' },
-  { id: '12', name: 'Kavya Menon',     car: 'Toyota Taisor',               bank: 'HDFC',    roi: '8.85%', status: 'In-Progress', date: '03 Sep, 09:50 AM' },
+  { id: '1',  name: 'Arjun Kapoor',    car: 'Toyota Hyryder',               bank: 'SBI',      roi: '8.60%', status: 'Disbursed',   date: 'Today, 10:24 AM' },
+  { id: '2',  name: 'Priya Sharma',    car: 'Toyota Urban Cruiser Hyryder',  bank: 'HDFC',     roi: '8.90%', status: 'In-Progress', date: 'Today, 09:10 AM' },
+  { id: '3',  name: 'Amit Verma',      car: 'Toyota Glanza',                bank: 'BOB',      roi: '8.60%', status: 'Disbursed',   date: 'Yesterday, 4:45 PM' },
+  { id: '4',  name: 'Sneha Patil',     car: 'Toyota Hyryder',               bank: 'ICICI',    roi: '8.90%', status: 'Rejected',    date: 'Yesterday, 2:30 PM' },
+  { id: '5',  name: 'Karan Singh',     car: 'Toyota Fortuner',              bank: 'Kotak',    roi: '8.80%', status: 'Sanctioned',  date: '25 Aug, 11:00 AM' },
+  { id: '6',  name: 'Deepika Nair',    car: 'Toyota Camry',                 bank: 'PNB',      roi: '8.70%', status: 'In-Progress', date: '25 Aug, 09:50 AM' },
+  { id: '7',  name: 'Vikram Joshi',    car: 'Toyota Innova Crysta',         bank: 'Yes Bank', roi: '8.75%', status: 'Disbursed',   date: '24 Aug, 3:15 PM' },
+  { id: '8',  name: 'Ananya Reddy',    car: 'Toyota Hyryder',               bank: 'Federal',  roi: '9.10%', status: 'Rejected',    date: '24 Aug, 1:00 PM' },
+  { id: '9',  name: 'Rohan Desai',     car: 'Toyota Yaris',                 bank: 'Axis',     roi: '8.75%', status: 'In-Progress', date: '02 Sep, 09:45 AM' },
+  { id: '10', name: 'Meera Iyer',      car: 'Toyota Innova HyCross',        bank: 'IDFC',     roi: '8.65%', status: 'Sanctioned',  date: '01 Sep, 09:20 AM' },
+  { id: '11', name: 'Suresh Nambiar',  car: 'Toyota Fortuner',              bank: 'SBI',      roi: '8.55%', status: 'In-Progress', date: '30 Aug, 1:45 PM' },
+  { id: '12', name: 'Kavya Menon',     car: 'Toyota Taisor',                bank: 'HDFC',     roi: '8.85%', status: 'In-Progress', date: '03 Sep, 09:50 AM' },
 ];
 
 const STATUS_CONFIG = {
@@ -109,17 +109,23 @@ export default function HistoryScreen() {
         </TouchableOpacity>
       </View>
 
-      {/* Filter chips */}
-      <View style={styles.filterChips}>
-        {['All', 'In-Progress', 'Sanctioned', 'Disbursed', 'Rejected'].map(f => (
-          <TouchableOpacity
-            key={f}
-            style={[styles.filterChip, activeFilter === f && styles.filterChipActive]}
-            onPress={() => setActiveFilter(f)}
-          >
-            <Text style={[styles.filterChipText, activeFilter === f && styles.filterChipTextActive]}>{f}</Text>
-          </TouchableOpacity>
-        ))}
+      {/* Filter chips — fixed strip, never scrolls away */}
+      <View style={styles.filterChipsScroll}>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.filterChips}
+        >
+          {['All', 'In-Progress', 'Sanctioned', 'Disbursed', 'Rejected'].map(f => (
+            <TouchableOpacity
+              key={f}
+              style={[styles.filterChip, activeFilter === f && styles.filterChipActive]}
+              onPress={() => setActiveFilter(f)}
+            >
+              <Text style={[styles.filterChipText, activeFilter === f && styles.filterChipTextActive]}>{f}</Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
       </View>
 
       {/* List */}
@@ -171,17 +177,26 @@ const styles = StyleSheet.create({
     backgroundColor: '#e8eef7', alignItems: 'center', justifyContent: 'center',
   },
 
-  filterChips: {
-    flexDirection: 'row', gap: 8,
-    paddingHorizontal: 16, paddingBottom: 12, paddingTop: 4,
+  filterChipsScroll: {
     backgroundColor: '#fff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#e8e8e8',
+    flexShrink: 0,
+  },
+  filterChips: {
+    flexDirection: 'row',
+    gap: 8,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    alignItems: 'center',
   },
   filterChip: {
-    paddingHorizontal: 14, paddingVertical: 6, borderRadius: 20,
-    backgroundColor: '#f0f0f0',
+    paddingHorizontal: 18, paddingVertical: 8, borderRadius: 20,
+    backgroundColor: '#fff',
+    borderWidth: 1.5, borderColor: '#d0d0d0',
   },
-  filterChipActive: { backgroundColor: '#1a3a6b' },
-  filterChipText: { fontSize: 12, fontWeight: '600', color: '#666' },
+  filterChipActive: { backgroundColor: '#1a3a6b', borderColor: '#1a3a6b' },
+  filterChipText: { fontSize: 13, fontWeight: '600', color: '#444' },
   filterChipTextActive: { color: '#fff' },
 
   list: { padding: 16, paddingBottom: 30 },
