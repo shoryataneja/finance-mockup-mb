@@ -13,7 +13,9 @@ function fmtINR(n) {
 }
 
 export default function EnquiryStep3Screen({ route, navigation }) {
-  const [vehicleModel, setVehicleModel] = useState('');
+  const [make, setMake] = useState('');
+  const [model, setModel] = useState('');
+  const [variant, setVariant] = useState('');
   const [vehiclePrice, setVehiclePrice] = useState('');
   const [downPayment, setDownPayment] = useState('');
   const [tenure, setTenure] = useState(60);
@@ -21,14 +23,14 @@ export default function EnquiryStep3Screen({ route, navigation }) {
   const price = parseFloat(vehiclePrice) || 0;
   const dp = parseFloat(downPayment) || 0;
   const loanAmount = Math.max(0, price - dp);
-  const isValid = vehicleModel.trim() && price > 0 && dp > 0 && loanAmount > 0;
+  const isValid = make.trim() && model.trim() && variant.trim() && price > 0 && dp > 0 && loanAmount > 0;
 
   const [showCibilModal, setShowCibilModal] = useState(false);
   const [cibilInput, setCibilInput] = useState('');
   const [fieldError, setFieldError] = useState('');
 
   const handleRecommend = () => {
-    if (!vehicleModel.trim() || price <= 0 || dp <= 0 || loanAmount <= 0) {
+    if (!make.trim() || !model.trim() || !variant.trim() || price <= 0 || dp <= 0 || loanAmount <= 0) {
       setFieldError('Please fill in Vehicle Model, On-Road Price, and Down Payment to continue.');
       return;
     }
@@ -51,7 +53,7 @@ export default function EnquiryStep3Screen({ route, navigation }) {
     navigation.navigate('RecommendBanks', {
       step1: route.params?.step1,
       step2: { ...route.params?.step2, cibilScore },
-      step3: { vehicleModel, vehiclePrice: price, downPayment: dp, loanAmount, tenure },
+      step3: { make, model, variant, vehiclePrice: price, downPayment: dp, loanAmount, tenure },
     });
   };
 
@@ -101,13 +103,33 @@ export default function EnquiryStep3Screen({ route, navigation }) {
 
       <ScrollView contentContainerStyle={styles.scroll} keyboardShouldPersistTaps="handled">
 
-        <Field label="Vehicle Model">
+        <Field label="Make">
           <TextInput
             style={styles.input}
-            placeholder="e.g. Toyota Hyryder S Hybrid"
+            placeholder="e.g. Toyota"
             placeholderTextColor="#aaa"
-            value={vehicleModel}
-            onChangeText={setVehicleModel}
+            value={make}
+            onChangeText={setMake}
+          />
+        </Field>
+
+        <Field label="Model">
+          <TextInput
+            style={styles.input}
+            placeholder="e.g. Hyryder"
+            placeholderTextColor="#aaa"
+            value={model}
+            onChangeText={setModel}
+          />
+        </Field>
+
+        <Field label="Variant">
+          <TextInput
+            style={styles.input}
+            placeholder="e.g. S Hybrid"
+            placeholderTextColor="#aaa"
+            value={variant}
+            onChangeText={setVariant}
           />
         </Field>
 
