@@ -12,7 +12,8 @@ const EMPTY_COAPPLICANT = {
   incomePerMonth: '', existingEmi: '', foir: '', cibil: '',
 };
 
-const PROFILES = ['Salaried', 'Business', 'Self Employee', 'Company', 'Agriculture'];
+const PROFILES = ['Salaried', 'Business', 'Self Employee', 'Company', ];
+const PROFESSIONS = ['Rental Income', 'Driver Cum Owner', 'Water Supply', 'Real Estate', 'Doctor', 'Lawyer', 'Material Supply', 'Auditors', 'Chartered Accountant', 'Trader', 'Commission Agent', 'Restaurant', 'Agriculture'];
 const OFFICE_STATUS = ['Company Owned', 'Self Owned'];
 const INCOME_PROFILE = ['Income Proof', 'No Income Proof'];
 const PROOF_OPTIONS = ['ITR', 'Form 16', 'Rental Agreement', 'ETC'];
@@ -21,7 +22,7 @@ const ADDITIONAL_INCOME_SOURCES = ['Income from House Property', 'Agriculture', 
 const CO_RELATIONS = ['Spouse', 'Father', 'Mother', 'Son', 'Daughter', 'Brother', 'Sister', 'Father-in-Law', 'Mother-in-Law'];
 const CO_GENDERS = ['Male', 'Female', 'Other'];
 const CO_MARITAL = ['Single', 'Married', 'Divorced', 'Widowed'];
-const CO_PROFILES = ['Salaried', 'Business', 'Self Employee', 'Agriculture'];
+const CO_PROFILES = ['Salaried', 'Business', 'Self Employee', ];
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const currentYear = new Date().getFullYear();
 const YEARS = Array.from({ length: 80 }, (_, i) => currentYear - i);
@@ -38,6 +39,7 @@ function isCoApplicantComplete(c) {
 export default function EnquiryStep2Screen({ route, navigation }) {
   const [form, setForm] = useState({
     profile: '',
+    profession: '',
     yearsInJob: '',
     officeStatus: '',
     incomeProfile: '',
@@ -95,7 +97,8 @@ export default function EnquiryStep2Screen({ route, navigation }) {
   }, [form.incomePerMonth, form.existingEmiTotal]);
 
   const isValid =
-    form.profile && form.yearsInJob && form.officeStatus && form.incomeProfile &&
+    form.profile && (form.profile !== 'Self Employee' || form.profession) &&
+    form.yearsInJob && form.officeStatus && form.incomeProfile &&
     form.proofOfIncome && form.accountBank && form.existingVehicle && form.model &&
     form.trackStatus && form.incomePerMonth && form.existingEmiTotal &&
     form.additionalIncome &&
@@ -125,6 +128,16 @@ export default function EnquiryStep2Screen({ route, navigation }) {
             ))}
           </View>
         </Field>
+
+        {form.profile === 'Self Employee' && (
+          <Field label="Profession">
+            <View style={styles.chipRow}>
+              {PROFESSIONS.map(p => (
+                <Chip key={p} label={p} active={form.profession === p} onPress={() => set('profession', p)} />
+              ))}
+            </View>
+          </Field>
+        )}
 
         <Field label="No. of Years in Current Job / Business">
           <TextInput

@@ -8,7 +8,7 @@ import { Ionicons } from '@expo/vector-icons';
 const RELATIONS = ['Spouse', 'Father', 'Mother', 'Son', 'Daughter', 'Brother', 'Sister', 'Father-in-Law', 'Mother-in-Law'];
 const GENDERS = ['Male', 'Female', 'Other'];
 const MARITAL = ['Single', 'Married', 'Divorced', 'Widowed'];
-const PROFILES = ['Salaried', 'Business', 'Self Employee', 'Agriculture'];
+const PROFILES = ['Salaried', 'Business', 'Self Employee'];
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const currentYear = new Date().getFullYear();
 const YEARS = Array.from({ length: 80 }, (_, i) => currentYear - i);
