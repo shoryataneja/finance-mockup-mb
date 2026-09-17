@@ -6,7 +6,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 
 const BANKS = [
-  { id: 1,  short: 'SBI',   name: 'State Bank of India',   roi: 8.60, tier: 'gold' },
+  { id: 1,  short: 'SBI',   name: 'State Bank of India',   roi: 8.50, tier: 'gold' },
   { id: 2,  short: 'BOB',   name: 'Bank of Baroda',         roi: 8.60, tier: 'gold' },
   { id: 3,  short: 'PNB',   name: 'Punjab National Bank',   roi: 8.70, tier: 'gold' },
   { id: 4,  short: 'YES',   name: 'Yes Bank',               roi: 8.75, tier: 'silver' },
@@ -29,7 +29,7 @@ const TIER_COLORS = {
 function calcEMI(principal, annualRate, months) {
   if (!principal || !annualRate || !months) return 0;
   const r = annualRate / 12 / 100;
-  return Math.round((principal * r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1));
+  return Math.ceil((principal * r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1));
 }
 
 function fmtINR(n) {
@@ -84,7 +84,7 @@ export default function RecommendBanksScreen({ navigation, route }) {
             <Text style={styles.statLabel}>Banks Eligible</Text>
           </View>
           <View style={[styles.statBox, styles.statBoxMid]}>
-            <Text style={styles.statVal}>8.60%</Text>
+            <Text style={styles.statVal}>8.50%</Text>
             <Text style={styles.statLabel}>Best Rate</Text>
           </View>
           <View style={styles.statBox}>

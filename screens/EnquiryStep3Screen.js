@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-const TENURE_OPTIONS = [12, 24, 36, 48, 60, 72, 84];
+const TENURE_OPTIONS = [12, 24, 36, 48, 60];
 
 function fmtINR(n) {
   if (!n) return '₹0';
