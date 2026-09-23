@@ -6,28 +6,38 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 
 const ROLE_CONFIG = {
-  'Team Lead':         { color: '#1a3a6b', bg: '#e8eef7' },
-  'Senior Executive':  { color: '#5c6bc0', bg: '#ede7f6' },
-  'Finance Executive': { color: '#1a7a4a', bg: '#e6f4ed' },
-  'Backend Team':      { color: '#b07d1a', bg: '#fdf3e0' },
+  'Team Leader':         { color: '#1a7a4a', bg: '#e6f4ed' },
+  'Insurance Executive': { color: '#3b5bdb', bg: '#f0f4ff' },
+  'Finance Executive':   { color: '#1a3a6b', bg: '#e8eef7' },
 };
 
 const AVATAR_COLORS = ['#1a3a6b','#1a7a4a','#5c6bc0','#b07d1a','#2a7a8a','#8a3a6b','#b03a2e','#3a6b3a'];
 
 const INITIAL_USERS = [
-  { id: '1', name: 'Ayush Tyagi',    role: 'Team Lead',         branch: 'Koramangala', phone: '+91 98765 00001', status: 'Active',   joined: 'Aug 2021' },
-  { id: '2', name: 'Priya Sharma',   role: 'Finance Executive', branch: 'Koramangala', phone: '+91 98765 00002', status: 'Active',   joined: 'Jan 2023' },
-  { id: '3', name: 'Rahul Mehta',    role: 'Finance Executive', branch: 'Whitefield',  phone: '+91 98765 00003', status: 'Active',   joined: 'Mar 2023' },
-  { id: '4', name: 'Sneha Patil',    role: 'Senior Executive',  branch: 'Koramangala', phone: '+91 98765 00004', status: 'Active',   joined: 'Jun 2022' },
-  { id: '5', name: 'Amit Verma',     role: 'Finance Executive', branch: 'Jayanagar',   phone: '+91 98765 00005', status: 'Active',   joined: 'Sep 2022' },
-  { id: '6', name: 'Deepika Nair',   role: 'Finance Executive', branch: 'Malleshwaram',phone: '+91 98765 00006', status: 'Active',   joined: 'Feb 2024' },
-  { id: '7', name: 'Vikram Joshi',   role: 'Senior Executive',  branch: 'Banashankari',phone: '+91 98765 00007', status: 'Active',   joined: 'May 2021' },
-  { id: '8', name: 'Meera Iyer',     role: 'Finance Executive', branch: 'Whitefield',  phone: '+91 98765 00008', status: 'Inactive', joined: 'Nov 2023' },
-  { id: '9', name: 'Karan Singh',    role: 'Backend Team',      branch: 'Koramangala', phone: '+91 98765 00009', status: 'Active',   joined: 'Aug 2021' },
-  { id: '10',name: 'Ananya Reddy',   role: 'Backend Team',      branch: 'Koramangala', phone: '+91 98765 00010', status: 'Active',   joined: 'Dec 2022' },
+  { id: '1',  name: 'Shylaja',         role: 'Team Leader',         branch: 'Hosur Road',   phone: '+91 98001 00001', status: 'Active', joined: 'Jan 2020' },
+  { id: '2',  name: 'Sandeep',         role: 'Insurance Executive', branch: 'Hosur Road',   phone: '+91 98001 00002', status: 'Active', joined: 'Jan 2021' },
+  { id: '3',  name: 'Vijay',           role: 'Insurance Executive', branch: 'Hosur Road',   phone: '+91 98001 00003', status: 'Active', joined: 'Feb 2021' },
+  { id: '4',  name: 'Bhaskar',         role: 'Insurance Executive', branch: 'Hosur Road',   phone: '+91 98001 00004', status: 'Active', joined: 'Mar 2021' },
+  { id: '5',  name: 'Hirelinga',       role: 'Insurance Executive', branch: 'Hosur Road',   phone: '+91 98001 00005', status: 'Active', joined: 'Apr 2021' },
+  { id: '6',  name: 'Hemalatha',       role: 'Insurance Executive', branch: 'Hosur Road',   phone: '+91 98001 00006', status: 'Active', joined: 'May 2021' },
+  { id: '7',  name: 'Sunil',           role: 'Insurance Executive', branch: 'K P Road',     phone: '+91 98001 00007', status: 'Active', joined: 'Jun 2021' },
+  { id: '8',  name: 'Shailesh',        role: 'Insurance Executive', branch: 'K P Road',     phone: '+91 98001 00008', status: 'Active', joined: 'Jun 2021' },
+  { id: '9',  name: 'Dilip',           role: 'Insurance Executive', branch: 'K P Road',     phone: '+91 98001 00009', status: 'Active', joined: 'Jul 2021' },
+  { id: '10', name: 'Srivasta',        role: 'Insurance Executive', branch: 'K P Road',     phone: '+91 98001 00010', status: 'Active', joined: 'Aug 2021' },
+  { id: '11', name: 'Anu',             role: 'Insurance Executive', branch: 'K P Road',     phone: '+91 98001 00011', status: 'Active', joined: 'Aug 2021' },
+  { id: '12', name: 'Mahesh',          role: 'Finance Executive',   branch: 'Queens Road',  phone: '+91 98001 00012', status: 'Active', joined: 'Sep 2021' },
+  { id: '13', name: 'Shivu',           role: 'Finance Executive',   branch: 'Queens Road',  phone: '+91 98001 00013', status: 'Active', joined: 'Sep 2021' },
+  { id: '14', name: 'Kavitha',         role: 'Finance Executive',   branch: 'Queens Road',  phone: '+91 98001 00014', status: 'Active', joined: 'Oct 2021' },
+  { id: '15', name: 'Gajalakshmi',     role: 'Insurance Executive', branch: 'Banaswadi',    phone: '+91 98001 00015', status: 'Active', joined: 'Nov 2021' },
+  { id: '16', name: 'Nagesh',          role: 'Insurance Executive', branch: 'Banaswadi',    phone: '+91 98001 00016', status: 'Active', joined: 'Nov 2021' },
+  { id: '17', name: 'Lakshminarayana', role: 'Insurance Executive', branch: 'Banaswadi',    phone: '+91 98001 00017', status: 'Active', joined: 'Nov 2021' },
+  { id: '18', name: 'Pavithra',        role: 'Insurance Executive', branch: 'Banaswadi',    phone: '+91 98001 00018', status: 'Active', joined: 'Dec 2021' },
+  { id: '19', name: 'Harish',          role: 'Insurance Executive', branch: 'White Field',  phone: '+91 98001 00019', status: 'Active', joined: 'Dec 2021' },
+  { id: '20', name: 'Pradeep',         role: 'Insurance Executive', branch: 'White Field',  phone: '+91 98001 00020', status: 'Active', joined: 'Dec 2021' },
+  { id: '21', name: 'Girish',          role: 'Insurance Executive', branch: 'B G Road',     phone: '+91 98001 00021', status: 'Active', joined: 'Jan 2022' },
 ];
 
-const ROLES = ['Finance Executive', 'Senior Executive', 'Team Lead', 'Backend Team'];
+const ROLES = ['Insurance Executive', 'Finance Executive', 'Team Leader'];
 let nextUserId = 200;
 
 function initials(name) { return name.split(' ').map(w => w[0]).join('').slice(0, 2); }
