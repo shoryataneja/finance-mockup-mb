@@ -421,7 +421,7 @@ export default function EnquiryStep2Screen({ route, navigation }) {
         <TouchableOpacity
           style={[styles.nextBtn, !isValid && styles.nextBtnDisabled]}
           disabled={!isValid}
-          onPress={() => navigation.navigate('EnquiryStep3', { step1: route.params?.step1, step2: form })}
+          onPress={() => navigation.navigate('EnquiryDocUpload', { step1: route.params?.step1, step2: form })}
         >
           <Text style={styles.nextBtnText}>Check Eligibility</Text>
           <Ionicons name="arrow-forward" size={18} color="#fff" />

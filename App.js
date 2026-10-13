@@ -11,6 +11,7 @@ import HistoryScreen from './screens/HistoryScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import EnquiryStep1Screen from './screens/EnquiryStep1Screen';
 import EnquiryStep2Screen from './screens/EnquiryStep2Screen';
+import EnquiryDocUploadScreen from './screens/EnquiryDocUploadScreen';
 import EnquiryStep3Screen from './screens/EnquiryStep3Screen';
 import RecommendBanksScreen from './screens/RecommendBanksScreen';
 import SubmissionConfirmScreen from './screens/SubmissionConfirmScreen';
@@ -68,6 +69,11 @@ export default function App() {
         <Stack.Screen
           name="EnquiryStep2"
           component={EnquiryStep2Screen}
+          options={{ animation: 'slide_from_right' }}
+        />
+        <Stack.Screen
+          name="EnquiryDocUpload"
+          component={EnquiryDocUploadScreen}
           options={{ animation: 'slide_from_right' }}
         />
         <Stack.Screen
